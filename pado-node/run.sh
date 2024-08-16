@@ -100,8 +100,8 @@ elif [ "${cmd}" = "ao:deregister" ]; then
   general_cmd $@
 #
 # Task
-elif [ "${cmd}" = "dotask" ]; then
-  # dotask [name]
+elif [ "${cmd}" = "task" ]; then
+  # task [name]
   shift 1
   run_task $@
 else

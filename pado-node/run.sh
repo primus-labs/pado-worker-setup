@@ -91,6 +91,12 @@ elif [ "${cmd}" = "el:register" ]; then
 elif [ "${cmd}" = "el:get-operator-id" ]; then
   general_cmd $@
 #
+# worker
+elif [ "${cmd}" = "worker:balance" ]; then
+  general_cmd $@
+elif [ "${cmd}" = "worker:withdraw" ]; then
+  general_cmd $@
+#
 # AOs
 elif [ "${cmd}" = "ao:register" ]; then
   general_cmd $@

@@ -1,36 +1,58 @@
+
 - [AO Worker](#ao-worker)
+  - [Install](#install)
+  - [Basic Configurations](#basic-configurations)
+    - [Node Info](#node-info)
+    - [Arweave Wallet](#arweave-wallet)
+    - [LHE Key](#lhe-key)
+  - [Storage](#storage)
+  - [Register to PADO AO Process](#register-to-pado-ao-process)
+  - [Run Task](#run-task)
+  - [Add New Workers](#add-new-workers)
+    - [Add EigenLayer Worker](#add-eigenlayer-worker)
 
 
 # AO Worker
 
-## Configurations
+
+## Install
+
+Please reference to official documentation: [Install Docker Engine](https://docs.docker.com/engine/install/).
+
+Next, pull the image:
+
+```shell
+docker pull padolabs/pado-network:latest
+```
+
+Clone [pado-labs/pado-worker-setup](https://github.com/pado-labs/pado-worker-setup):
+```sh
+git clone https://github.com/pado-labs/pado-worker-setup.git
+cd pado-worker-setup/pado-node
+```
+
+## Basic Configurations
 
 Copy `./config-files/.env.ao` into `./.env`. Edit the `./.env` and update the values for your own setups.
 
-
-<br/>
 
 ### Node Info
 
 Set a name to identify yourself, these will be used on the node itself and will be shown on performance metrics in the future.
 
-```conf
-# Set a name to identify yourself
+```sh
 NODE_NAME="Your Node Name"
 NODE_DESCRIPTION="Your Node Name's Description"
 ```
 
 
-### ArWallet
+### Arweave Wallet
 
-If you don't have an AR wallet, you can install one from [ArConnect](https://www.arconnect.io/download), and then export the wallet from ArConnect and store it to somewhere.
+If you don't have an Arweave wallet, you can install one from [ArConnect](https://www.arconnect.io/download), and then export the wallet from ArConnect and store it to somewhere.
 
-Next, fill in the file path of the AR wallet,
+Next, fill in the file path of the Arweave wallet,
 
-```conf
-#
-# AR Wallet, for storage
-#
+```sh
 AR_WALLET_PATH='/path/to/your/arwallet.json'
 ```
 
@@ -45,31 +67,30 @@ bash ./run.sh generate-lhe-key [--key-name <NAME>]
 
 The default output is `./keys/default.lhe.key.json`, you can specify the key name via `--key-name <NAME>`.
 
+**IMPORTANT!** Don't lose this file and save it to a safe place!
 
 Next, fill in the file path of the LHE key you have generated.
 
-```conf
-#
-# LHE KEY
-# For task: data sharing
-#
+```sh
 LHE_KEY_PATH='/path/to/your/lhe.key.json'
 ```
 
 
 ## Storage
 
-Storing data on a contract is expensive, so we use [arweave](https://www.arweave.org/) which is cheaper to store data.
+Storing data on a contract is expensive, so we are currently using [Arweave](https://www.arweave.org/) as the storage blockchain which is cheaper to store data.
 
-In order to use [Arseeding](https://web3infra.dev/docs/arseeding/introduction/lightNode), you need to first transfer some AR to [everPay](https://app.everpay.io/), which wallet corresponds to the ArWallet previously mentioned above.
+By default, we can use Arweave directly. However, the Arweave ecosystem itself has [some issues](https://web3infra.dev/docs/arseeding/introduction/lightNode/#why-we-need-arseeding). In order **not** to suffer from these issues, we using [Arseeding](https://web3infra.dev/docs/arseeding/introduction/lightNode) instead.
 
-Alternatively, you can deposit on EverPay with the following command:
+
+In order to use Arseeding, we need to first transfer/deposit some AR to [everPay](https://app.everpay.io/), **which wallet corresponds to the Arweave wallet previously mentioned above**.
+
+**Alternatively**, you can also deposit on EverPay with the following command:
 
 ```sh
-# here set your own wallet path
-export WALLET_PATH=/path/to/your/wallet.json
-# here set your own AMOUNT
-bash ./utils.sh everpay:deposit --chain arweave --symbol AR --amount <AMOUNT>
+# here set your arweave wallet path
+export WALLET_PATH=/path/to/your/arweave/wallet.json
+bash ./utils.sh everpay:deposit --chain <CHAIN_TYPE> --symbol <SYMBOL> --amount <AMOUNT>
 # e.g.:
 # bash ./utils.sh everpay:deposit --chain arweave --symbol AR --amount 0.00001
 ```
@@ -77,11 +98,11 @@ bash ./utils.sh everpay:deposit --chain arweave --symbol AR --amount <AMOUNT>
 Meanwhile, you can check the balance on EverPay by:
 
 ```sh
-bash ./utils.sh everpay:balance --account <ACCOUNT_ADDRESS> --symbol AR
+bash ./utils.sh everpay:balance --account <ACCOUNT_ADDRESS> [--symbol <SYMBOL>]
 ```
 
 
-## Registry
+## Register to PADO AO Process
 
 **NOTE:** *Please contact [PADO Labs](https://discord.gg/YxJftNRxhh) to add your wallet address to the WHITELIST before being able to successfully register!*
 
@@ -93,7 +114,7 @@ bash ./run.sh ao:register
 
 <br/>
 
-In general, you only need to perform the registry steps once.
+In general, you only need to perform the registry step once.
 
 
 ## Run Task
@@ -102,8 +123,22 @@ Once successfully registered, you can start the task program. If necessary, e.g.
 
 
 ```sh
-bash ./run.sh dotask [<name>]
+bash ./run.sh task [<name>]
 ```
 
 The container-name is `pado-network[-name]`.
+
+Some logs will output to `./logs/*.log`.
+
+
+## Add New Workers
+
+### Add EigenLayer Worker
+
+Reference the following difference parts of [EigenLayer Worker](./README-EigenLayerWorker.md):
+- Register as Operator on EigenLayer
+- Basic Configurations
+- ECDSA and BLS Key
+- Storage
+- Register to PADO AVS
 

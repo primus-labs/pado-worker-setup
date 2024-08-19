@@ -1,6 +1,5 @@
 
 - [pado-node](#pado-node)
-  - [Install](#install)
   - [Guides](#guides)
   - [A brief summary of command lines](#a-brief-summary-of-command-lines)
     - [LHE Key](#lhe-key)
@@ -12,17 +11,6 @@
 # pado-node
 
 Here introduces how to run a node using docker.
-
-
-## Install
-
-Please reference to official documentation: [Install Docker Engine](https://docs.docker.com/engine/install/).
-
-Next, pull the image:
-
-```shell
-docker pull padolabs/pado-network:latest
-```
 
 
 ## Guides
@@ -57,7 +45,7 @@ bash ./run.sh ao:register
 ### Task for all workers
 
 ```sh
-bash ./run.sh dotask [<name>]
+bash ./run.sh task [<name>]
 ```
 
 

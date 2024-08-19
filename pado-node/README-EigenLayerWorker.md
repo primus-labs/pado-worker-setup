@@ -10,6 +10,8 @@
   - [Run Task](#run-task)
   - [Add New Workers](#add-new-workers)
     - [Add AO Worker](#add-ao-worker)
+  - [Utilities](#utilities)
+    - [Worker Withdraw](#worker-withdraw)
 
 
 # EigenLayer Worker
@@ -110,7 +112,7 @@ In order to use Arseeding, we need to first transfer/deposit some ETH to [everPa
 ```sh
 # here set your ethereum wallet path
 export WALLET_PATH=/path/to/your/ethereum/wallet.json
-node ./dist/cmd.js everpay:deposit --chain <CHAIN_TYPE> --symbol <SYMBOL> --amount <AMOUNT>
+# bash ./utils.sh everpay:deposit --chain <CHAIN_TYPE> --symbol <SYMBOL> --amount <AMOUNT>
 # e.g.:
 # bash ./utils.sh everpay:deposit --chain ethereum --symbol ETH --amount 0.00001
 ```
@@ -186,3 +188,21 @@ Reference the following difference parts of [AO Worker](./README-AOWorker.md):
 - Storage
 - Register to PADO AO Process
 
+
+## Utilities
+
+### Worker Withdraw
+
+As a worker, you'll get some tokens for each task you complete.
+
+You can get the balance(free, locked) by:
+
+```sh
+bash ./run.sh worker:balance
+```
+
+and withdraw by (If no amount is specified, the entire free balance is withdrawn):
+
+```sh
+bash ./run.sh worker:withdraw [--amount <AMOUNT>]
+```

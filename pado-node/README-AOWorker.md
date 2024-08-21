@@ -1,5 +1,6 @@
 
 - [AO Worker](#ao-worker)
+  - [Software/Hardware Requirement](#softwarehardware-requirement)
   - [Install](#install)
   - [Basic Configurations](#basic-configurations)
     - [Node Info](#node-info)
@@ -12,6 +13,14 @@
 
 
 # AO Worker
+
+
+## Software/Hardware Requirement 
+
+- Operating System: linux
+- vCPUs: 2+
+- Memory: 4GiB+
+- Storage: 100GiB+
 
 
 ## Install

@@ -1,4 +1,5 @@
 - [EigenLayer Worker](#eigenlayer-worker)
+  - [Software/Hardware Requirement](#softwarehardware-requirement)
   - [Install](#install)
   - [Register as Operator on EigenLayer](#register-as-operator-on-eigenlayer)
   - [Basic Configurations](#basic-configurations)
@@ -17,6 +18,14 @@
 # EigenLayer Worker
 
 
+## Software/Hardware Requirement 
+
+- Operating System: linux
+- vCPUs: 2+
+- Memory: 4GiB+
+- Storage: 100GiB+
+
+
 ## Install
 
 Please reference to official documentation: [Install Docker Engine](https://docs.docker.com/engine/install/).
@@ -32,7 +41,6 @@ Clone [pado-labs/pado-worker-setup](https://github.com/pado-labs/pado-worker-set
 git clone https://github.com/pado-labs/pado-worker-setup.git
 cd pado-worker-setup/pado-node
 ```
-
 
 ## Register as Operator on EigenLayer
 

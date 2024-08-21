@@ -17,7 +17,6 @@
 
 ## Software/Hardware Requirement 
 
-- Operating System: linux
 - vCPUs: 2+
 - Memory: 4GiB+
 - Storage: 100GiB+

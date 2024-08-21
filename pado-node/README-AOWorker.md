@@ -1,11 +1,11 @@
 
 - [AO Worker](#ao-worker)
+  - [Software/Hardware Requirement](#softwarehardware-requirement)
   - [Install](#install)
   - [Basic Configurations](#basic-configurations)
     - [Node Info](#node-info)
     - [Arweave Wallet](#arweave-wallet)
     - [LHE Key](#lhe-key)
-  - [Storage](#storage)
   - [Register to PADO AO Process](#register-to-pado-ao-process)
   - [Run Task](#run-task)
   - [Add New Workers](#add-new-workers)
@@ -13,6 +13,13 @@
 
 
 # AO Worker
+
+
+## Software/Hardware Requirement 
+
+- vCPUs: 2+
+- Memory: 4GiB+
+- Storage: 100GiB+
 
 
 ## Install
@@ -76,30 +83,6 @@ LHE_KEY_PATH='/path/to/your/lhe.key.json'
 ```
 
 
-## Storage
-
-Storing data on a contract is expensive, so we are currently using [Arweave](https://www.arweave.org/) as the storage blockchain which is cheaper to store data.
-
-By default, we can use Arweave directly. However, the Arweave ecosystem itself has [some issues](https://web3infra.dev/docs/arseeding/introduction/lightNode/#why-we-need-arseeding). In order **not** to suffer from these issues, we using [Arseeding](https://web3infra.dev/docs/arseeding/introduction/lightNode) instead.
-
-
-In order to use Arseeding, we need to first transfer/deposit some AR to [everPay](https://app.everpay.io/), **which wallet corresponds to the Arweave wallet previously mentioned above**.
-
-**Alternatively**, you can also deposit on EverPay with the following command:
-
-```sh
-# here set your arweave wallet path
-export WALLET_PATH=/path/to/your/arweave/wallet.json
-bash ./utils.sh everpay:deposit --chain <CHAIN_TYPE> --symbol <SYMBOL> --amount <AMOUNT>
-# e.g.:
-# bash ./utils.sh everpay:deposit --chain arweave --symbol AR --amount 0.00001
-```
-
-Meanwhile, you can check the balance on EverPay by:
-
-```sh
-bash ./utils.sh everpay:balance --account <ACCOUNT_ADDRESS> [--symbol <SYMBOL>]
-```
 
 
 ## Register to PADO AO Process
@@ -119,26 +102,43 @@ In general, you only need to perform the registry step once.
 
 ## Run Task
 
-Once successfully registered, you can start the task program. If necessary, e.g. in a production environment, it is recommended to start the program as a background process.
-
+Once successfully registered, you can start the task program.
 
 ```sh
 bash ./run.sh task [<name>]
 ```
 
-The container-name is `pado-network[-name]`.
+It will start a container named `pado-network[-name]` in the background. Some logs will output to `./logs/*.log`.
 
-Some logs will output to `./logs/*.log`.
+You can Stop/Start/Restart/Remove the container by running `docker stop/start/restart/rm pado-network[-name]`.
 
 
 ## Add New Workers
 
 ### Add EigenLayer Worker
 
-Reference the following difference parts of [EigenLayer Worker](./README-EigenLayerWorker.md):
-- Register as Operator on EigenLayer
-- Basic Configurations
-- ECDSA and BLS Key
-- Storage
-- Register to PADO AVS
+Step 1: Reference `./config-files/.env.holesky`(Holesky), mainly copy and append the following options and their value to `.env`:
+
+```sh
+ENABLE_EIGEN_LAYER
+ETH_RPC_URL
+REGISTRY_COORDINATOR_ADDRESS
+ROUTER_ADDRESS
+ECDSA_KEY_FILE
+ECDSA_KEY_PASSWORD
+BLS_KEY_FILE
+BLS_KEY_PASSWORD
+```
+
+Step 2: Set your own `ECDSA_KEY_FILE`, `ECDSA_KEY_PASSWORD`, `BLS_KEY_FILE`, `BLS_KEY_PASSWORD`. Reference [Register as Operator on EigenLayer](./README-EigenLayerWorker.md#register-as-operator-on-eigenlayer) and [ECDSA and BLS Key](./README-EigenLayerWorker.md#ecdsa-and-bls-key).
+
+Step 3: Deposit some ETH to everPay. Reference [Storage](./README-EigenLayerWorker.md#storage).
+
+Step 4: Register to PADO AO Process. Reference [Register to PADO AVS](./README-EigenLayerWorker.md#register-to-pado-avs).
+
+Step 5: Remove the old container and re-run the task. Reference [Run Task](#run-task).
+
+<br/>
+
+You can see the full configuration options from `./config-files/.env.holesky-and-ao`.
 

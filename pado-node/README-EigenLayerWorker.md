@@ -54,8 +54,7 @@ Complete the following steps according to [EigenLayer guide](https://docs.eigenl
 
 For the Ethernet Testnet(Holesky), copy `./config-files/.env.holesky` into `./.env`. Edit the `./.env` and update the values for your own setups.
 
-**NOTE**: *If you plan to operate on Mainnet, then copy `.env.mainnet` instead of `.env.holesky`*.
-
+**NOTE**: *Currently only supports Holesky.*
 
 ### Node Info
 
@@ -167,26 +166,41 @@ bash ./run.sh el:get-operator-id
 
 ## Run Task
 
-Once successfully registered, you can start the task program. If necessary, e.g. in a production environment, it is recommended to start the program as a background process.
-
+Once successfully registered, you can start the task program.
 
 ```sh
 bash ./run.sh task [<name>]
 ```
 
-The container-name is `pado-network[-name]`.
+It will start a container named `pado-network[-name]` in the background. Some logs will output to `./logs/*.log`.
 
-Some logs will output to `./logs/*.log`.
+You can Stop/Start/Restart/Remove the container by running `docker stop/start/restart/rm pado-network[-name]`.
+
 
 ## Add New Workers
 
 ### Add AO Worker
 
-Reference the following difference parts of [AO Worker](./README-AOWorker.md):
-- Basic Configurations
-- Arweave Wallet
-- Storage
-- Register to PADO AO Process
+Step 1: Reference `./config-files/.env.ao`, mainly copy and append the following options and their value to `.env`:
+
+```sh
+ENABLE_AO
+AO_DATAREGISTRY_PROCESS_ID
+AO_NODEREGISTRY_PROCESS_ID
+AO_TASKS_PROCESS_ID
+AR_WALLET_PATH
+```
+
+Step 2: Set your own `AR_WALLET_PATH`. Reference [Arweave Wallet](./README-AOWorker.md#arweave-wallet).
+
+Step 3: Register to PADO AO Process. Reference [Register to PADO AO Process](./README-AOWorker.md#register-to-pado-ao-process).
+
+Step 4: Remove the old container and re-run the task. Reference [Run Task](#run-task).
+
+<br/>
+
+You can see the full configuration options from `./config-files/.env.holesky-and-ao`.
+
 
 
 ## Utilities

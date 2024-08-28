@@ -11,7 +11,7 @@ scrape_configs:
   - job_name: "pado-node"
     scrape_interval: 5s
     static_configs:
-      # format container:port
+      # FORMAT container:port
       #   container: pado-node container name
       #        port: NODE_METRICS_PORT
       - targets: ["pado-network:9094"]

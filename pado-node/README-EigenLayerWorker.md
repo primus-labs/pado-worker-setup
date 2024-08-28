@@ -8,8 +8,9 @@
     - [LHE Key](#lhe-key)
   - [Storage](#storage)
   - [Register to PADO AVS](#register-to-pado-avs)
+  - [(Optional) Metrics and Monitoring](#optional-metrics-and-monitoring)
   - [Run Task](#run-task)
-  - [Add New Workers](#add-new-workers)
+  - [(Optional) Add New Workers](#optional-add-new-workers)
     - [Add AO Worker](#add-ao-worker)
   - [Utilities](#utilities)
     - [Worker Withdraw](#worker-withdraw)
@@ -171,6 +172,13 @@ bash ./run.sh el:get-operator-id
 ```
 
 
+## (Optional) Metrics and Monitoring
+
+Metrics can be enabled/disabled by setting `NODE_ENABLE_METRICS` to `true/false`. The default value is `false`. You can also set a port by `NODE_METRICS_PORT` for the monitoring, which defaults to `9094`.
+
+For monitoring, refer to the [monitoring](../monitoring/README.md).
+
+
 ## Run Task
 
 Once successfully registered, you can start the task program.
@@ -184,7 +192,7 @@ It will start a container named `pado-network[-name]` in the background. Some lo
 You can Stop/Start/Restart/Remove the container by running `docker stop/start/restart/rm pado-network[-name]`.
 
 
-## Add New Workers
+## (Optional) Add New Workers
 
 ### Add AO Worker
 

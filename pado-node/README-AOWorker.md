@@ -8,7 +8,7 @@
     - [LHE Key](#lhe-key)
   - [Register to PADO AO Process](#register-to-pado-ao-process)
   - [Run Task](#run-task)
-  - [Add New Workers](#add-new-workers)
+  - [(Optional) Add New Workers](#optional-add-new-workers)
     - [Add EigenLayer Worker](#add-eigenlayer-worker)
 
 
@@ -113,7 +113,7 @@ It will start a container named `pado-network[-name]` in the background. Some lo
 You can Stop/Start/Restart/Remove the container by running `docker stop/start/restart/rm pado-network[-name]`.
 
 
-## Add New Workers
+## (Optional) Add New Workers
 
 ### Add EigenLayer Worker
 

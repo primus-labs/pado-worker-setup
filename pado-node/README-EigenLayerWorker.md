@@ -8,8 +8,9 @@
     - [LHE Key](#lhe-key)
   - [Storage](#storage)
   - [Register to PADO AVS](#register-to-pado-avs)
-  - [(Optional) Metrics and Monitoring](#optional-metrics-and-monitoring)
+  - [(Optional) Metrics](#optional-metrics)
   - [Run Task](#run-task)
+  - [(Optional) Monitoring](#optional-monitoring)
   - [(Optional) Add New Workers](#optional-add-new-workers)
     - [Add AO Worker](#add-ao-worker)
   - [Utilities](#utilities)
@@ -172,12 +173,11 @@ bash ./run.sh el:get-operator-id
 ```
 
 
-## (Optional) Metrics and Monitoring
+## (Optional) Metrics
 
-Metrics can be enabled/disabled by setting `NODE_ENABLE_METRICS` to `true/false`. The default value is `false`. You can also set a port by `NODE_METRICS_PORT` for the monitoring, which defaults to `9094`.
+Metrics can be enabled/disabled by setting `NODE_ENABLE_METRICS` to `true/false`. The default value is `false`. You can also set a port by `NODE_METRICS_PORT` for the metrics service, which defaults to `9094`.
 
-For monitoring, refer to the [monitoring](../monitoring/README.md).
-
+If you want to monitor some metrics, you should set `NODE_ENABLE_METRICS` to `true` to enable it.
 
 ## Run Task
 
@@ -190,6 +190,11 @@ bash ./run.sh task [<name>]
 It will start a container named `pado-network[-name]` in the background. Some logs will output to `./logs/*.log`.
 
 You can Stop/Start/Restart/Remove the container by running `docker stop/start/restart/rm pado-network[-name]`.
+
+
+## (Optional) Monitoring
+
+If you have enabled [Metrics](#optional-metrics), you can view these metrics via [monitoring](../monitoring/README.md).
 
 
 ## (Optional) Add New Workers

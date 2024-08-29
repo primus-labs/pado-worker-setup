@@ -26,11 +26,12 @@ if [ "${ENABLE_AO}" = "true" ]; then
 fi
 
 mapped_keys="${mapped_ecdsa_key} ${mapped_bls_key} ${mapped_lhe_key} ${mapped_ar_wallet}"
-# echo ${mapped_ecdsa_key}
-# echo ${mapped_bls_key}
-# echo ${mapped_lhe_key}
-# echo ${mapped_ar_wallet}
 # echo ${mapped_keys}
+
+mapped_ports=
+if [ ${NODE_METRICS_PORT} ]; then
+  mapped_ports="-p ${NODE_METRICS_PORT}:${NODE_METRICS_PORT}"
+fi
 # ################################################
 
 function usage() {
@@ -69,8 +70,12 @@ function run_task() {
   if [ $# -ge 1 ]; then
     _name="-$1"
   fi
-  docker run -d --env-file .env ${mapped_keys} \
+
+  network_name=pado-network
+  docker network inspect ${network_name} >/dev/null 2>&1 || docker network create --driver bridge ${network_name} >/dev/null 2>&1
+  docker run -d --env-file .env ${mapped_keys} ${mapped_ports} \
     -v ./logs:/pado-network/logs/ \
+    --network ${network_name} \
     --restart unless-stopped \
     --name pado-network${_name} \
     ${pado_net_worker_image} \

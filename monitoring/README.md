@@ -43,7 +43,13 @@ Note:
 docker compose up -d
 ```
 
-You should be able to navigate to `http://host:3000` and login with `admin/admin`. 
+Ensure Prometheus is run in the same Docker network as PADO Network Node. Run the following command for this purpose:
+
+```sh
+docker network connect pado-network prometheus
+```
+
+You should be able to navigate to `http://host:3000` and login with `admin/admin` (default). 
 
 
 - Stop

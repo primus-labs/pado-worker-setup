@@ -49,6 +49,8 @@ Ensure Prometheus is run in the same Docker network as PADO Network Node. Run th
 docker network connect pado-network prometheus
 ```
 
+Note: `pado-network` is the name of the docker network that is automatically created when you start the node. `prometheus` is the container name of Prometheus.
+
 You should be able to navigate to `http://host:3000` and login with `admin/admin` (default). 
 
 

@@ -112,6 +112,16 @@ It will start a container named `pado-network[-name]` in the background. Some lo
 
 You can Stop/Start/Restart/Remove the container by running `docker stop/start/restart/rm pado-network[-name]`.
 
+<br/>
+
+**Upgrade Node**
+
+```sh
+docker stop pado-network[-name]
+docker rm pado-network[-name]
+docker pull padolabs/pado-network:latest
+bash ./run.sh task [<name>]
+```
 
 ## (Optional) Add New Workers
 

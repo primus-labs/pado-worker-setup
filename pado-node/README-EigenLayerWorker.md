@@ -122,7 +122,7 @@ In order to use Arseeding, we need to first transfer/deposit some mainnet ETH to
 export WALLET_PATH=/path/to/your/ethereum/wallet.json
 # bash ./utils.sh everpay:deposit --chain <CHAIN_TYPE> --symbol <SYMBOL> --amount <AMOUNT>
 # e.g.:
-# bash ./utils.sh everpay:deposit --chain ethereum --symbol ETH --amount 0.003
+# bash ./utils.sh everpay:deposit --chain ethereum --symbol ETH --amount 0.0003
 ```
 
 Meanwhile, you can check the balance on EverPay by:

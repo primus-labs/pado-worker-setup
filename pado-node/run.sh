@@ -93,6 +93,8 @@ elif [ "${cmd}" = "el:register-as-operator" ]; then
   general_cmd $@
 elif [ "${cmd}" = "el:register" ]; then
   general_cmd $@
+elif [ "${cmd}" = "el:deregister" ]; then
+  general_cmd $@
 elif [ "${cmd}" = "el:get-operator-id" ]; then
   general_cmd $@
 #

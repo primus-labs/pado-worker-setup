@@ -113,7 +113,7 @@ Storing data on a contract is expensive, so we are currently using [Arweave](htt
 By default, we can use Arweave directly. However, the Arweave ecosystem itself has [some issues](https://web3infra.dev/docs/arseeding/introduction/lightNode/#why-we-need-arseeding). In order **not** to suffer from these issues, we using [Arseeding](https://web3infra.dev/docs/arseeding/introduction/lightNode) instead.
 
 
-In order to use Arseeding, we need to first transfer/deposit some ETH to [everPay](https://app.everpay.io/), **which wallet corresponds to the ecdsa key previously mentioned above**.
+In order to use Arseeding, we need to first transfer/deposit some mainnet ETH to [everPay](https://app.everpay.io/), **which wallet corresponds to the ecdsa key previously mentioned above**.
 
 **Alternatively**, you can also deposit on EverPay with the following command:
 
@@ -122,7 +122,7 @@ In order to use Arseeding, we need to first transfer/deposit some ETH to [everPa
 export WALLET_PATH=/path/to/your/ethereum/wallet.json
 # bash ./utils.sh everpay:deposit --chain <CHAIN_TYPE> --symbol <SYMBOL> --amount <AMOUNT>
 # e.g.:
-# bash ./utils.sh everpay:deposit --chain ethereum --symbol ETH --amount 0.00001
+# bash ./utils.sh everpay:deposit --chain ethereum --symbol ETH --amount 0.003
 ```
 
 Meanwhile, you can check the balance on EverPay by:
@@ -191,6 +191,16 @@ It will start a container named `pado-network[-name]` in the background. Some lo
 
 You can Stop/Start/Restart/Remove the container by running `docker stop/start/restart/rm pado-network[-name]`.
 
+<br/>
+
+**Upgrade Node**
+
+```sh
+docker stop pado-network[-name]
+docker rm pado-network[-name]
+docker pull padolabs/pado-network:latest
+bash ./run.sh task [<name>]
+```
 
 ## (Optional) Monitoring
 
